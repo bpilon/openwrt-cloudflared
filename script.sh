@@ -70,30 +70,30 @@ echo "Directories created."
 echo ""
 
 # Update package list
-echo "Updating package list..."
-run_command opkg update
-echo "Package list updated."
-echo ""
+#echo "Updating package list..."
+#run_command opkg update
+#echo "Package list updated."
+#echo ""
 
 # Check if coreutils-base64 is installed
-if ! opkg list-installed coreutils-base64 > /dev/null 2>&1; then
-  echo "Installing coreutils-base64..."
-  run_command opkg install coreutils-base64
-  echo "coreutils-base64 installed."
-  echo ""
-fi
+#if ! opkg list-installed coreutils-base64 > /dev/null 2>&1; then
+#  echo "Installing coreutils-base64..."
+#  run_command opkg install coreutils-base64
+#  echo "coreutils-base64 installed."
+#  echo ""
+#fi
 
 # Get the filename of the downloaded package
-filename=$(opkg info cloudflared | awk -F ": " '/Filename:/ {print $2}')
+#filename=$(opkg info cloudflared | awk -F ": " '/Filename:/ {print $2}')
 
 # Navigate to the cloudflared directory
 cd /tmp/cloudflared
 
 # Download and extract the cloudflared package
 echo "Downloading and extracting cloudflared package..."
-run_command opkg download cloudflared
-run_command tar zxpvf "$filename"
-rm "$filename"
+run_command wget https://downloads.openwrt.org/releases/22.03.2/packages/mips_24kc/packages/cloudflared_2023.7.1-1_mips_24kc.ipk
+run_command tar zxpvf cloudflared_2023.7.1-1_mips_24kc.ipk
+rm cloudflared_2023.7.1-1_mips_24kc.ipk
 rm debian-binary control.tar.gz
 echo "Cloudflared package downloaded and extracted."
 echo ""
