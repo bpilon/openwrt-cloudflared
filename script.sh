@@ -158,7 +158,8 @@ fi
 # Check if --import parameter is provided for decryption
 if [ -n "$import_string" ]; then
   echo "Restoring /root/.cloudflared..."
-  decode_tar_string "$import_string" "/tmp/cloudflared/root/"
+  #decode_tar_string "$import_string" "/tmp/cloudflared/root/"
+  run_command ash /usr/bin/cloudflared/run.sh
   echo "/root/.cloudflared restored."
   echo ""
 else
